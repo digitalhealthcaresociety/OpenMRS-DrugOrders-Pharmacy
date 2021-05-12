@@ -78,7 +78,7 @@
                         <% if(currentOrders.contains(medplan.drugId.getDisplayString().toUpperCase())) { %>
                             <input type="checkbox" class="unchecked" disabled="disabled" />
                         <% } else { %>
-                            <input type="checkbox" class="groupCheckBox" name="groupCheckBox" value="${ medplan.drugId }" checked="true" />
+                            <input type="checkbox" class="groupCheckBox" name="groupCheckBox" value="${ medplan.drugId.getDisplayString().toUpperCase()}" checked="true" />
                         <% } %>
                         
                         <i class="icon-plus-sign  edit-action" title="${ ui.message("Show") }"></i>
@@ -164,16 +164,16 @@
     
     <script type="text/javascript">
         <!--Hide the individual/group orders table-->
-        jq("#activeOrderWindow").hide();
+        jq("#activeOrderWindow").show();
         <!--Show the medPlanDetailsWindow block-->
         jq("#medPlanDetailsWindow").show();       
 
         <!--Show the details of the given drug order-->
         jq(".icon-plus-sign").click(function(){
             jq(this).parent().nextAll(".groupBlock").first().show();
-            jq(this).hide();
             jq(this).next(".icon-minus-sign").show();
         });
+        jq(selectPlanButton).show();
 
         <!--Hide the details of the given drug order-->
         jq(".icon-minus-sign").click(function(){
