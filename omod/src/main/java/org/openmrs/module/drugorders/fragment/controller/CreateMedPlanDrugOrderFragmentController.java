@@ -46,6 +46,7 @@ public class CreateMedPlanDrugOrderFragmentController {
         model.addAttribute("planName", planName.trim());
         
         List<standardplans> medplans = new ArrayList<>();
+
         
         // Check if there exists standard medications plans for the disease selected.
         if(Context.getService(newplansService.class).getMedPlanByPlanName(Context.getConceptService().getConceptByName(planName)) != null && Context.getService(newplansService.class).getMedPlanByPlanName(Context.getConceptService().getConceptByName(planName)).getPlanStatus().equals("Active")){
@@ -77,6 +78,7 @@ public class CreateMedPlanDrugOrderFragmentController {
         
         List<Concept> names = new ArrayList<>();
         for (ConceptSearchResult con : results) {
+        	
             
             //Based on the characters typed, check if a plan exists and is currently active.
             newplans plan = Context.getService(newplansService.class).getMedPlanByPlanName(con.getConcept());
@@ -84,6 +86,8 @@ public class CreateMedPlanDrugOrderFragmentController {
                 if(Context.getService(standardplansService.class).getMedPlansByPlanID(plan.getId()).size() > 0)
                     names.add(con.getConcept());
             }
+       
+            names.add(con.getConcept());
         }
         // Sort the list of concepts by their name
         Comparator comparator = new ByFormattedObjectComparator(ui);
